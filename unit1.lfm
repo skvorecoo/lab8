@@ -1,0 +1,71 @@
+object Form1: TForm1
+  Left = 1117
+  Height = 600
+  Top = 456
+  Width = 800
+  HorzScrollBar.Page = 188
+  VertScrollBar.Page = 28
+  AutoScroll = True
+  Caption = 'Form1'
+  ClientHeight = 575
+  ClientWidth = 800
+  DesignTimePPI = 120
+  Menu = MainMenu
+  LCLVersion = '2.2.0.4'
+  object Memo: TMemo
+    Left = 0
+    Height = 632
+    Top = 0
+    Width = 800
+    Align = alTop
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    ParentBidiMode = False
+    TabOrder = 0
+  end
+  object MainMenu: TMainMenu
+    Left = 40
+    Top = 16
+    object FileActions: TMenuItem
+      Caption = 'Файл'
+      object OpenFile: TMenuItem
+        Caption = 'Открыть'
+        OnClick = OpenFileClick
+      end
+      object SaveFile: TMenuItem
+        Caption = 'Сохранить'
+        OnClick = SaveFileClick
+      end
+      object SaveFileAs: TMenuItem
+        Caption = 'Сохранить как'
+        OnClick = SaveFileAsClick
+      end
+      object TerminateTextEditor: TMenuItem
+        Caption = 'Выход'
+        OnClick = TerminateTextEditorClick
+      end
+    end
+    object Editing: TMenuItem
+      Caption = 'Правка'
+      object CopyText: TMenuItem
+        Caption = 'Копировать'
+        OnClick = CopyTextClick
+      end
+      object PasteText: TMenuItem
+        Caption = 'Вставить'
+        OnClick = PasteTextClick
+      end
+      object CutText: TMenuItem
+        Caption = 'Вырезать'
+        OnClick = CutTextClick
+      end
+    end
+  end
+  object OpenDialog: TOpenDialog
+    Left = 96
+    Top = 16
+  end
+  object SaveDialog: TSaveDialog
+    Left = 160
+    Top = 16
+  end
+end
