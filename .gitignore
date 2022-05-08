@@ -1,4 +1,4 @@
-.exe
+*.exe
 backup
 lib
-.txt
+*.txt
