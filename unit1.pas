@@ -36,7 +36,7 @@ type
     procedure CopyTextClick(Sender: TObject);
     procedure CutTextClick(Sender: TObject);
     procedure FontStyleClick(Sender: TObject);
-    procedure MemoChange(Sender: TObject);
+
     procedure MenuItem1Click(Sender: TObject);
     procedure OpenFileClick(Sender: TObject);
     procedure PasteTextClick(Sender: TObject);
@@ -53,6 +53,7 @@ type
 var
   Form1: TForm1;
   FileName: string;
+  memo_text : array of string;
 
 implementation
 
@@ -80,10 +81,7 @@ begin
   if FontDialog.Execute then Memo.Font:=FontDialog.Font;
 end;
 
-procedure TForm1.MemoChange(Sender: TObject);
-begin
 
-end;
 
 procedure TForm1.MenuItem1Click(Sender: TObject);
 begin
@@ -114,27 +112,34 @@ begin
   Memo.PasteFromClipboard;
 end;
 
+
+
 procedure TForm1.PrintFileClick(Sender: TObject);
 const
   LEFTMARGIN = 100;
 
 var
-  YPos, LineHeight, VerticalMargin: Integer;
-  SuccessString,HEADLINE: String;
+  YPos, LineHeight, VerticalMargin,i: Integer;
+  SuccessString,s: String;
+
 begin
-  str(Memo.Lines.Count,HEADLINE);
+
+
   with Printer do
   try
     BeginDoc;
-    Canvas.Font.Name := 'Courier New';
-    Canvas.Font.Size := 10;
+    Canvas.Font.Name := 'Times new Roman';
+    Canvas.Font.Size := 12;
     Canvas.Font.Color := clBlack;
     LineHeight := Round(1.2 * Abs(Canvas.TextHeight('I')));
-    VerticalMargin := 4 * LineHeight;
+    VerticalMargin := 1 * LineHeight;
     // There we go
-    YPos := VerticalMargin;
-    SuccessString := HEADLINE;
-    Canvas.TextOut(LEFTMARGIN, YPos, SuccessString);
+    for i := 0 to Form1.Memo.Lines.Count -1 do begin
+           YPos := VerticalMargin*(i+1);
+           SuccessString := Form1.Memo.Lines[i];
+           Canvas.TextOut(LEFTMARGIN, YPos, SuccessString);
+    end;
+
   finally
     EndDoc;
   end;
