@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 604
+  Left = 641
   Height = 526
-  Top = 362
+  Top = 171
   Width = 663
   Caption = 'SimpleNotepad'
   ClientHeight = 506
@@ -14,7 +14,32 @@ object Form1: TForm1
     Top = 0
     Width = 663
     Align = alClient
+    OnChange = MemoChange
     TabOrder = 0
+  end
+  object Panel1: TPanel
+    Left = 8
+    Height = 33
+    Top = 448
+    Width = 104
+    AutoSize = True
+    ClientHeight = 33
+    ClientWidth = 104
+    TabOrder = 1
+    object Label1: TLabel
+      Left = 1
+      Height = 15
+      Top = 1
+      Width = 102
+      Caption = 'Количество строк:'
+    end
+    object Label2: TLabel
+      Left = 1
+      Height = 15
+      Top = 17
+      Width = 96
+      Caption = 'Количество букв:'
+    end
   end
   object MainMenu: TMainMenu
     Left = 32

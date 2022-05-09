@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, Menus, StdCtrls,
-  PrintersDlgs, Printers,Printer4Lazarus;
+  PrintersDlgs, Printers, ExtCtrls,Printer4Lazarus;
 
 type
 
@@ -14,6 +14,8 @@ type
 
   TForm1 = class(TForm)
     FontDialog: TFontDialog;
+    Label1: TLabel;
+    Label2: TLabel;
     MainMenu: TMainMenu;
     FileActions: TMenuItem;
     Editing: TMenuItem;
@@ -21,6 +23,7 @@ type
     Memo: TMemo;
     MenuItem1: TMenuItem;
     FontStyle: TMenuItem;
+    Panel1: TPanel;
     Style: TMenuItem;
     PrinterSetupDialog: TPrinterSetupDialog;
     PrintFile: TMenuItem;
@@ -36,6 +39,7 @@ type
     procedure CopyTextClick(Sender: TObject);
     procedure CutTextClick(Sender: TObject);
     procedure FontStyleClick(Sender: TObject);
+    procedure MemoChange(Sender: TObject);
 
     procedure MenuItem1Click(Sender: TObject);
     procedure OpenFileClick(Sender: TObject);
@@ -83,6 +87,32 @@ end;
 
 
 
+procedure TForm1.MemoChange(Sender: TObject);
+const Alpha : set of char=['A'..'Z','a'..'z'];
+Beta : set of char = ['0'..'9','!'..'-'];
+var tmp,s : string;
+  i,wc,dc,j :integer;
+begin
+  str(Form1.Memo.Lines.Count,tmp);
+  Label1.caption := 'Количество строк: ' +  tmp;
+  i:=1; wc:=0;dc := 0;
+  for j := 0 to Form1.Memo.Lines.Count -1 do begin
+          s := Form1.Memo.Lines[j];
+          Repeat
+        while NOT(s[i] in Alpha) and (i<=length(s)) do i:= i + 1;
+        if (i<=length(s)) then wc := wc + 1;
+        while ((s[i] in Alpha) or (s[i] in Beta)) and (i<=length(s)) do begin
+        i := i + 1;
+        if not(s[i] in Beta) then dc := dc + 1;
+        end;
+     Until (i>length(s));
+     str(dc,tmp);
+     Label2.caption := 'Количество букв: ' + tmp;
+  end;
+end;
+
+
+
 procedure TForm1.MenuItem1Click(Sender: TObject);
 begin
   If not(Memo.WordWrap) then
@@ -126,6 +156,7 @@ var
 begin
   with Printer do
   try
+
     // украл с гугла
     BeginDoc;
     Canvas.Font.Name := 'Times new Roman';
