@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, Menus, StdCtrls,
-  PrintersDlgs, Printers;
+  PrintersDlgs, Printers,Printer4Lazarus;
 
 type
 
@@ -115,8 +115,29 @@ begin
 end;
 
 procedure TForm1.PrintFileClick(Sender: TObject);
-begin
+const
+  LEFTMARGIN = 100;
 
+var
+  YPos, LineHeight, VerticalMargin: Integer;
+  SuccessString,HEADLINE: String;
+begin
+  str(Memo.Lines.Count,HEADLINE);
+  with Printer do
+  try
+    BeginDoc;
+    Canvas.Font.Name := 'Courier New';
+    Canvas.Font.Size := 10;
+    Canvas.Font.Color := clBlack;
+    LineHeight := Round(1.2 * Abs(Canvas.TextHeight('I')));
+    VerticalMargin := 4 * LineHeight;
+    // There we go
+    YPos := VerticalMargin;
+    SuccessString := HEADLINE;
+    Canvas.TextOut(LEFTMARGIN, YPos, SuccessString);
+  finally
+    EndDoc;
+  end;
 end;
 
 procedure PSaveFileAs;
