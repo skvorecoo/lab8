@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, Menus, StdCtrls,
-  PrintersDlgs, Printers;
+  PrintersDlgs, Printers,Printer4Lazarus;
 
 type
 
@@ -36,7 +36,7 @@ type
     procedure CopyTextClick(Sender: TObject);
     procedure CutTextClick(Sender: TObject);
     procedure FontStyleClick(Sender: TObject);
-    procedure MemoChange(Sender: TObject);
+
     procedure MenuItem1Click(Sender: TObject);
     procedure OpenFileClick(Sender: TObject);
     procedure PasteTextClick(Sender: TObject);
@@ -53,6 +53,7 @@ type
 var
   Form1: TForm1;
   FileName: string;
+  memo_text : array of string;
 
 implementation
 
@@ -80,10 +81,7 @@ begin
   if FontDialog.Execute then Memo.Font:=FontDialog.Font;
 end;
 
-procedure TForm1.MemoChange(Sender: TObject);
-begin
 
-end;
 
 procedure TForm1.MenuItem1Click(Sender: TObject);
 begin
@@ -114,9 +112,44 @@ begin
   Memo.PasteFromClipboard;
 end;
 
-procedure TForm1.PrintFileClick(Sender: TObject);
-begin
 
+
+procedure TForm1.PrintFileClick(Sender: TObject);
+const
+  LEFTMARGIN = 100; // отступ слева
+
+var
+  YPos, LineHeight, VerticalMargin,i,y: Integer;
+  SuccessString,s: String;
+
+
+begin
+  with Printer do
+  try
+    // украл с гугла
+    BeginDoc;
+    Canvas.Font.Name := 'Times new Roman';
+    Canvas.Font.Size := 12;
+    Canvas.Font.Color := clBlack;
+    LineHeight := Round(1.2 * Abs(Canvas.TextHeight('I')));
+    VerticalMargin := 1 * LineHeight;
+
+    y := 1; // номер строчки в печати
+    for i := 0 to Form1.Memo.Lines.Count -1 do begin
+           YPos := VerticalMargin*y; // строка в пикселях
+           SuccessString := Form1.Memo.Lines[i];
+           Canvas.TextOut(LEFTMARGIN, YPos, SuccessString);
+           y := y + 1;
+           // переход на новую страницу
+           if Ypos > 6500 then begin
+             NewPage;
+             y := 1;
+             end;
+    end;
+
+  finally
+    EndDoc;
+  end;
 end;
 
 procedure PSaveFileAs;
