@@ -116,28 +116,35 @@ end;
 
 procedure TForm1.PrintFileClick(Sender: TObject);
 const
-  LEFTMARGIN = 100;
+  LEFTMARGIN = 100; // отступ слева
 
 var
-  YPos, LineHeight, VerticalMargin,i: Integer;
+  YPos, LineHeight, VerticalMargin,i,y: Integer;
   SuccessString,s: String;
 
+
 begin
-
-
   with Printer do
   try
+    // украл с гугла
     BeginDoc;
     Canvas.Font.Name := 'Times new Roman';
     Canvas.Font.Size := 12;
     Canvas.Font.Color := clBlack;
     LineHeight := Round(1.2 * Abs(Canvas.TextHeight('I')));
     VerticalMargin := 1 * LineHeight;
-    // There we go
+
+    y := 1; // номер строчки в печати
     for i := 0 to Form1.Memo.Lines.Count -1 do begin
-           YPos := VerticalMargin*(i+1);
+           YPos := VerticalMargin*y; // строка в пикселях
            SuccessString := Form1.Memo.Lines[i];
            Canvas.TextOut(LEFTMARGIN, YPos, SuccessString);
+           y := y + 1;
+           // переход на новую страницу
+           if Ypos > 6500 then begin
+             NewPage;
+             y := 1;
+             end;
     end;
 
   finally
