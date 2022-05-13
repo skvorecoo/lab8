@@ -1,24 +1,31 @@
 object Form1: TForm1
-  Left = 604
-  Height = 526
-  Top = 362
-  Width = 663
+  Left = 1225
+  Height = 653
+  Top = 199
+  Width = 829
+  HorzScrollBar.Page = 188
+  VertScrollBar.Page = 20
+  AutoScroll = True
   Caption = 'SimpleNotepad'
-  ClientHeight = 506
-  ClientWidth = 663
+  ClientHeight = 628
+  ClientWidth = 829
+  DesignTimePPI = 120
   Menu = MainMenu
   LCLVersion = '2.2.0.4'
   object Memo: TMemo
     Left = 0
-    Height = 506
+    Height = 628
     Top = 0
-    Width = 663
+    Width = 829
     Align = alClient
+    BorderStyle = bsNone
+    ScrollBars = ssAutoBoth
     TabOrder = 0
+    WordWrap = False
   end
   object MainMenu: TMainMenu
-    Left = 32
-    Top = 13
+    Left = 40
+    Top = 16
     object FileActions: TMenuItem
       Caption = 'Файл'
       object OpenFile: TMenuItem
@@ -59,10 +66,6 @@ object Form1: TForm1
     end
     object Style: TMenuItem
       Caption = 'Стиль'
-      object MenuItem1: TMenuItem
-        Caption = 'Перенос по строкам'
-        OnClick = MenuItem1Click
-      end
       object FontStyle: TMenuItem
         Caption = 'Шрифт'
         OnClick = FontStyleClick
@@ -70,27 +73,31 @@ object Form1: TForm1
     end
   end
   object OpenDialog: TOpenDialog
-    Left = 77
-    Top = 13
+    Left = 96
+    Top = 16
   end
   object SaveDialog: TSaveDialog
-    Left = 128
-    Top = 13
+    Left = 160
+    Top = 16
   end
   object PrintDialog: TPrintDialog
     PrintToFile = True
     PrintRange = prPageNums
-    Left = 237
-    Top = 51
-  end
-  object PrinterSetupDialog: TPrinterSetupDialog
-    Left = 128
-    Top = 102
+    Left = 296
+    Top = 64
   end
   object FontDialog: TFontDialog
     MinFontSize = 0
     MaxFontSize = 0
-    Left = 326
-    Top = 32
+    Left = 408
+    Top = 40
+  end
+  object PageSetupDialog1: TPageSetupDialog
+    Left = 134
+    Top = 195
+  end
+  object PrinterSetupDialog1: TPrinterSetupDialog
+    Left = 298
+    Top = 325
   end
 end

@@ -19,10 +19,10 @@ type
     Editing: TMenuItem;
     CopyText: TMenuItem;
     Memo: TMemo;
-    MenuItem1: TMenuItem;
     FontStyle: TMenuItem;
+    PageSetupDialog1: TPageSetupDialog;
+    PrinterSetupDialog1: TPrinterSetupDialog;
     Style: TMenuItem;
-    PrinterSetupDialog: TPrinterSetupDialog;
     PrintFile: TMenuItem;
     OpenDialog: TOpenDialog;
     PasteText: TMenuItem;
@@ -36,8 +36,7 @@ type
     procedure CopyTextClick(Sender: TObject);
     procedure CutTextClick(Sender: TObject);
     procedure FontStyleClick(Sender: TObject);
-
-    procedure MenuItem1Click(Sender: TObject);
+    procedure MenuItem2Click(Sender: TObject);
     procedure OpenFileClick(Sender: TObject);
     procedure PasteTextClick(Sender: TObject);
     procedure PrintFileClick(Sender: TObject);
@@ -56,7 +55,6 @@ var
   memo_text : array of string;
 
 implementation
-
 {$R *.lfm}
 
 { TForm1 }
@@ -81,22 +79,9 @@ begin
   if FontDialog.Execute then Memo.Font:=FontDialog.Font;
 end;
 
-
-
-procedure TForm1.MenuItem1Click(Sender: TObject);
+procedure TForm1.MenuItem2Click(Sender: TObject);
 begin
-  If not(Memo.WordWrap) then
-  begin
-    Memo.WordWrap:=True;
-    Memo.ScrollBars:=ssVertical;
-    MenuItem1.Checked:=True;
-  end
-  else
-  begin
-    Memo.WordWrap:=false;
-    Memo.ScrollBars:=ssBoth;
-    MenuItem1.Checked:=False;
-  end;
+  PageSetupDialog1.Execute;
 end;
 
 procedure TForm1.OpenFileClick(Sender: TObject);
@@ -112,42 +97,33 @@ begin
   Memo.PasteFromClipboard;
 end;
 
-
-
 procedure TForm1.PrintFileClick(Sender: TObject);
-const
-  LEFTMARGIN = 100; // отступ слева
 
 var
-  YPos, LineHeight, VerticalMargin,i,y: Integer;
-  SuccessString,s: String;
-
+  i,X,Y,CH: Integer;
 
 begin
+  if PrinterSetupDialog1.Execute then
   with Printer do
-  try
-    // украл с гугла
+  begin
     BeginDoc;
-    Canvas.Font.Name := 'Times new Roman';
-    Canvas.Font.Size := 12;
-    Canvas.Font.Color := clBlack;
-    LineHeight := Round(1.2 * Abs(Canvas.TextHeight('I')));
-    VerticalMargin := 1 * LineHeight;
-
-    y := 1; // номер строчки в печати
-    for i := 0 to Form1.Memo.Lines.Count -1 do begin
-           YPos := VerticalMargin*y; // строка в пикселях
-           SuccessString := Form1.Memo.Lines[i];
-           Canvas.TextOut(LEFTMARGIN, YPos, SuccessString);
-           y := y + 1;
-           // переход на новую страницу
-           if Ypos > 6500 then begin
-             NewPage;
-             y := 1;
-             end;
+    with Canvas do
+    begin
+      Font:=Memo.Font;
+      CH:=TextHeight('I'); //Высота (CH = CharHeight)
+      Y:=CH;
+      X:=PageWidth div 20;
+      for i:=0 to Memo.Lines.Count-1 do
+      begin
+        TextOut(X, Y, Memo.Lines[i]);
+        inc(Y, CH);
+        if PageHeight < Y+CH then
+        begin
+          NewPage;
+          Y:=CH;
+        end;
+      end;
     end;
-
-  finally
     EndDoc;
   end;
 end;
