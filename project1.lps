@@ -21,7 +21,6 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit1"/>
-        <IsVisibleTab Value="True"/>
         <TopLine Value="98"/>
         <CursorPos X="50" Y="100"/>
         <UsageCount Value="43"/>
@@ -41,11 +40,44 @@
       </Unit>
       <Unit>
         <Filename Value="unit1.lfm"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="6"/>
         <CursorPos X="27" Y="6"/>
         <UsageCount Value="17"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="LFM"/>
+      </Unit>
+      <Unit>
+        <Filename Value="G:\lab4\GlebLab\lab4bv1.pas"/>
+        <EditorIndex Value="1"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="G:\lab4\IvanOdegovLab\lab.pas"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="19"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\2i1g1s\IvanOdegovLab\main.pas"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="97"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\2i1g1s\IvanOdegovLab\lab.pas"/>
+        <EditorIndex Value="4"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\2i1g1s\GlebLab\lab4bv1.pas"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="5"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
