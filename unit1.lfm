@@ -1,27 +1,45 @@
 object Form1: TForm1
-  Left = 1225
-  Height = 653
-  Top = 199
-  Width = 829
+  Left = 1229
+  Height = 919
+  Top = 196
+  Width = 1092
   HorzScrollBar.Page = 188
-  VertScrollBar.Page = 20
+  VertScrollBar.Page = 51
   AutoScroll = True
   Caption = 'SimpleNotepad'
-  ClientHeight = 628
-  ClientWidth = 829
+  ClientHeight = 894
+  ClientWidth = 1092
   DesignTimePPI = 120
   Menu = MainMenu
   LCLVersion = '2.2.0.4'
   object Memo: TMemo
     Left = 0
-    Height = 628
+    Height = 863
     Top = 0
-    Width = 829
+    Width = 1092
     Align = alClient
     BorderStyle = bsNone
+    OnChange = MemoChange
     ScrollBars = ssAutoBoth
     TabOrder = 0
     WordWrap = False
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 31
+    Top = 863
+    Width = 1092
+    Align = alBottom
+    ClientHeight = 31
+    ClientWidth = 1092
+    TabOrder = 1
+    object Label3: TLabel
+      Left = 16
+      Height = 1
+      Top = 8
+      Width = 1
+      OnClick = Label3Click
+    end
   end
   object MainMenu: TMainMenu
     Left = 40

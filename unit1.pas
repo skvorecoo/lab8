@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, Menus, StdCtrls,
-  PrintersDlgs, Printers,Printer4Lazarus;
+  PrintersDlgs, Printers, ExtCtrls,Printer4Lazarus;
 
 type
 
@@ -14,6 +14,7 @@ type
 
   TForm1 = class(TForm)
     FontDialog: TFontDialog;
+    Label3: TLabel;
     MainMenu: TMainMenu;
     FileActions: TMenuItem;
     Editing: TMenuItem;
@@ -21,6 +22,7 @@ type
     Memo: TMemo;
     FontStyle: TMenuItem;
     PageSetupDialog1: TPageSetupDialog;
+    Panel1: TPanel;
     PrinterSetupDialog1: TPrinterSetupDialog;
     Style: TMenuItem;
     PrintFile: TMenuItem;
@@ -36,6 +38,8 @@ type
     procedure CopyTextClick(Sender: TObject);
     procedure CutTextClick(Sender: TObject);
     procedure FontStyleClick(Sender: TObject);
+    procedure Label3Click(Sender: TObject);
+    procedure MemoChange(Sender: TObject);
     procedure MenuItem2Click(Sender: TObject);
     procedure OpenFileClick(Sender: TObject);
     procedure PasteTextClick(Sender: TObject);
@@ -77,6 +81,17 @@ end;
 procedure TForm1.FontStyleClick(Sender: TObject);
 begin
   if FontDialog.Execute then Memo.Font:=FontDialog.Font;
+end;
+
+procedure TForm1.Label3Click(Sender: TObject);
+begin
+
+end;
+
+procedure TForm1.MemoChange(Sender: TObject);
+begin
+  Form1.Label3.Caption:='Строк: ' + IntToStr(Form1.Memo.Lines.Count)
+  + ' Символов: ' + IntToStr(length(Memo.Text));
 end;
 
 procedure TForm1.MenuItem2Click(Sender: TObject);
